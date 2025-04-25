@@ -1,5 +1,7 @@
 "use client";
 
+import AdBanner from "../components/AdBanner";
+import AdFooter from "../components/AdFooter";
 import React, { useState, useRef } from "react";
 import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
@@ -171,6 +173,8 @@ export default function EsamiRoulette() {
             <Button onClick={giraRoulette} className="text-lg sm:text-xl px-4 sm:px-6 py-2 font-semibold">🎲 Gira la Roulette</Button>
           </div>
 
+          <AdBanner />
+
           {result && (
             <div className="flex flex-wrap justify-center gap-2 pt-6">
               <Button onClick={copiaRisultato} variant="outline" className="text-sm px-3">{copied ? "✅ Copiato!" : "📋 Copia risultato"}</Button>
@@ -179,10 +183,11 @@ export default function EsamiRoulette() {
               <Button onClick={generaScreenshot} variant="outline" className="text-sm px-3">🖼️ Scarica Screenshot</Button>
             </div>
           )}
-          <div className="flex justify-center mt-6">
-            <a href="/privacy-policy" className="text-xs text-gray-400 underline">
-              Privacy Policy
-            </a>
+          <div className="flex flex-col items-center text-sm pt-6">
+            <div className="w-full flex justify-center mb-4">
+              <AdFooter />
+            </div>
+            <a href="/privacy-policy" className="underline text-gray-400">Privacy Policy</a>
           </div>
 
         </CardContent>
