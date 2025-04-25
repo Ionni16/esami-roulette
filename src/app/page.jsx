@@ -179,6 +179,12 @@ export default function EsamiRoulette() {
               <Button onClick={generaScreenshot} variant="outline" className="text-sm px-3">🖼️ Scarica Screenshot</Button>
             </div>
           )}
+          <div className="flex justify-center mt-6">
+            <a href="/privacy-policy" className="text-xs text-gray-400 underline">
+              Privacy Policy
+            </a>
+          </div>
+
         </CardContent>
       </Card>
     </div>
