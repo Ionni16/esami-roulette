@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "../components/ui/button";
+import { Card, CardContent } from "../components/ui/card";
 import { motion, AnimatePresence } from "framer-motion";
 import html2canvas from "html2canvas";
 import Particles from "react-tsparticles";
@@ -111,7 +111,7 @@ export default function EsamiRoulette() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center p-6 font-sans relative overflow-hidden">
+    <div className="min-h-screen bg-white flex flex-col items-center justify-start p-4 font-sans overflow-x-hidden w-full max-w-screen-sm mx-auto">
       {showParticles && (
         <Particles
           id="tsparticles"
@@ -121,10 +121,10 @@ export default function EsamiRoulette() {
         />
       )}
 
-      <h1 className="text-5xl font-extrabold mb-6 text-center animate-pulse tracking-tight z-10">🎓 Esami Roulette 🎰</h1>
+      <h1 className="text-3xl sm:text-5xl font-extrabold mb-6 text-center animate-pulse tracking-tight z-10">🎓 Esami Roulette 🎰</h1>
 
-      <Card className="w-full max-w-2xl text-lg shadow-xl z-10">
-        <CardContent className="space-y-4 py-8">
+      <Card className="w-full text-lg shadow-xl z-10">
+        <CardContent className="space-y-4 py-6 px-4 text-base leading-relaxed break-words">
           <AnimatePresence mode="wait">
             {result ? (
               <motion.div
@@ -133,22 +133,14 @@ export default function EsamiRoulette() {
                 animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
                 exit={{ opacity: 0, scale: 0.6, y: 30, filter: "blur(8px)" }}
                 transition={{ duration: 1, ease: "easeInOut" }}
-                className="text-xl font-medium text-left bg-gradient-to-br from-white to-gray-100 text-black p-6 rounded-xl shadow-lg border space-y-4"
+                className="text-xl font-medium text-left bg-gradient-to-br from-white to-gray-100 text-black p-4 rounded-xl shadow-lg border space-y-4"
                 ref={resultRef}
               >
                 <div className="flex flex-col space-y-2">
-                  <p className="whitespace-nowrap overflow-hidden text-ellipsis">
-                    👨‍🏫 <strong>Prof:</strong> {result.prof}
-                  </p>
-                  <p className="whitespace-nowrap overflow-hidden text-ellipsis">
-                    📚 <strong>Domande:</strong> {result.domande}
-                  </p>
-                  <p className="whitespace-nowrap overflow-hidden text-ellipsis">
-                    🧠 <strong>Stato:</strong> {result.stato}
-                  </p>
-                  <p className="whitespace-nowrap overflow-hidden text-ellipsis">
-                    📊 <strong>Esito:</strong> {result.esito}
-                  </p>
+                  <p className="break-words">👨‍🏫 <strong>Prof:</strong> {result.prof}</p>
+                  <p className="break-words">📚 <strong>Domande:</strong> {result.domande}</p>
+                  <p className="break-words">🧠 <strong>Stato:</strong> {result.stato}</p>
+                  <p className="break-words">📊 <strong>Esito:</strong> {result.esito}</p>
                 </div>
               </motion.div>
             ) : (
@@ -176,7 +168,7 @@ export default function EsamiRoulette() {
           )}
 
           <div className="flex justify-center pt-4">
-            <Button onClick={giraRoulette} className="text-xl px-6 py-2 animate-bounce font-semibold">🎲 Gira la Roulette</Button>
+            <Button onClick={giraRoulette} className="text-lg sm:text-xl px-4 sm:px-6 py-2 font-semibold">🎲 Gira la Roulette</Button>
           </div>
 
           {result && (
@@ -192,9 +184,3 @@ export default function EsamiRoulette() {
     </div>
   );
 }
-
-
-
-
-
-
