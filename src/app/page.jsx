@@ -71,7 +71,7 @@ export default function EsamiRoulette() {
     const script1 = document.createElement("script");
     script1.async = true;
     script1.setAttribute("data-cfasync", "false");
-    script1.src = "//pl27179633.profitableratecpm.com/3d104fc908000cabf94df11fbb2ae3c8/invoke.js";
+    script1.src = "https://pl27179633.profitableratecpm.com/3d104fc908000cabf94df11fbb2ae3c8/invoke.js";
     const adContainer = document.getElementById("container-3d104fc908000cabf94df11fbb2ae3c8");
     if (adContainer && adContainer.childNodes.length === 0) {
       adContainer.appendChild(script1);
@@ -80,7 +80,7 @@ export default function EsamiRoulette() {
     // Script 2 - Banner che si inietta direttamente nel body (es. footer/popup)
     const script2 = document.createElement("script");
     script2.type = "text/javascript";
-    script2.src = "//pl27180137.profitableratecpm.com/96/ad/07/96ad07e367ce2c86b4bc54f040132406.js";
+    script2.src = "https://pl27180137.profitableratecpm.com/96/ad/07/96ad07e367ce2c86b4bc54f040132406.js";
     document.body.appendChild(script2);
 
     // Cleanup
