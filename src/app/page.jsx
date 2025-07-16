@@ -143,146 +143,139 @@ export default function EsamiRoulette() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-start p-4 font-sans overflow-x-hidden w-full max-w-screen-sm mx-auto">
-      {showParticles && (
-        <Particles
-          id="tsparticles"
-          init={particlesInit}
-          options={{ preset: "fireworks" }}
-          className="absolute inset-0 z-0"
-        />
-      )}
+    <>
       <Head>
-      <meta name="clckd" content="d15383c672092f877ac4d68b6525d85a" />
-    </Head>
-
-      <h1 className="text-3xl sm:text-5xl font-extrabold mb-6 text-center animate-pulse tracking-tight z-10">
-        🎓 Esami Roulette 🎰
-      </h1>
-
-      <Card className="w-full text-lg shadow-xl z-10">
-        <CardContent className="space-y-4 py-6 px-4 text-base leading-relaxed break-words">
-
-          <AnimatePresence mode="wait">
-            {result ? (
-              <motion.div
-                key={JSON.stringify(result)}
-                initial={{ opacity: 0, scale: 0.9, y: 0, filter: "blur(10px)" }}
-                animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, scale: 0.6, y: 30, filter: "blur(8px)" }}
-                transition={{ duration: 1, ease: "easeInOut" }}
-                className="text-xl font-medium text-left bg-gradient-to-br from-white to-gray-100 text-black p-4 rounded-xl shadow-lg border space-y-4"
-                ref={resultRef}
+        <meta name="clckd" content="d15383c672092f877ac4d68b6525d85a" />
+      </Head>
+      <div className="min-h-screen bg-white flex flex-col items-center justify-start p-4 font-sans overflow-x-hidden w-full max-w-screen-sm mx-auto">
+        {showParticles && (
+          <Particles
+            id="tsparticles"
+            init={particlesInit}
+            options={{ preset: "fireworks" }}
+            className="absolute inset-0 z-0"
+          />
+        )}
+        <h1 className="text-3xl sm:text-5xl font-extrabold mb-6 text-center animate-pulse tracking-tight z-10">
+          🎓 Esami Roulette 🎰
+        </h1>
+        <Card className="w-full text-lg shadow-xl z-10">
+          <CardContent className="space-y-4 py-6 px-4 text-base leading-relaxed break-words">
+            <AnimatePresence mode="wait">
+              {result ? (
+                <motion.div
+                  key={JSON.stringify(result)}
+                  initial={{ opacity: 0, scale: 0.9, y: 0, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, scale: 0.6, y: 30, filter: "blur(8px)" }}
+                  transition={{ duration: 1, ease: "easeInOut" }}
+                  className="text-xl font-medium text-left bg-gradient-to-br from-white to-gray-100 text-black p-4 rounded-xl shadow-lg border space-y-4"
+                  ref={resultRef}
+                >
+                  <div className="flex flex-col space-y-2">
+                    <p className="break-words">
+                      👨‍🏫 <strong>Prof:</strong> {result.prof}
+                    </p>
+                    <p className="break-words">
+                      📚 <strong>Domande:</strong> {result.domande}
+                    </p>
+                    <p className="break-words">
+                      🧠 <strong>Stato:</strong> {result.stato}
+                    </p>
+                    <p className="break-words">
+                      📊 <strong>Esito:</strong> {result.esito}
+                    </p>
+                  </div>
+                </motion.div>
+              ) : (
+                <motion.p
+                  key="placeholder"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-center text-gray-500 text-base"
+                >
+                  Premi il bottone per scoprire il tuo destino universitario 👇
+                </motion.p>
+              )}
+            </AnimatePresence>
+            {result && (
+              <div
+                ref={cleanRef}
+                className="absolute left-[-9999px] top-0 bg-white text-black p-6 w-[500px] text-left text-lg"
               >
-                <div className="flex flex-col space-y-2">
-                  <p className="break-words">
-                    👨‍🏫 <strong>Prof:</strong> {result.prof}
-                  </p>
-                  <p className="break-words">
-                    📚 <strong>Domande:</strong> {result.domande}
-                  </p>
-                  <p className="break-words">
-                    🧠 <strong>Stato:</strong> {result.stato}
-                  </p>
-                  <p className="break-words">
-                    📊 <strong>Esito:</strong> {result.esito}
-                  </p>
-                </div>
-              </motion.div>
-            ) : (
-              <motion.p
-                key="placeholder"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-center text-gray-500 text-base"
-              >
-                Premi il bottone per scoprire il tuo destino universitario 👇
-              </motion.p>
+                <p>
+                  <strong>👨‍🏫 Prof:</strong> {result.prof}
+                </p>
+                <p>
+                  <strong>📚 Domande:</strong> {result.domande}
+                </p>
+                <p>
+                  <strong>🧠 Stato mentale:</strong> {result.stato}
+                </p>
+                <p>
+                  <strong>📊 Esito finale:</strong> {result.esito}
+                </p>
+              </div>
             )}
-          </AnimatePresence>
-
-          {result && (
-            <div
-              ref={cleanRef}
-              className="absolute left-[-9999px] top-0 bg-white text-black p-6 w-[500px] text-left text-lg"
-            >
-              <p>
-                <strong>👨‍🏫 Prof:</strong> {result.prof}
-              </p>
-              <p>
-                <strong>📚 Domande:</strong> {result.domande}
-              </p>
-              <p>
-                <strong>🧠 Stato mentale:</strong> {result.stato}
-              </p>
-              <p>
-                <strong>📊 Esito finale:</strong> {result.esito}
-              </p>
-            </div>
-          )}
-
-          <div className="flex justify-center pt-4">
-            <Button
-              onClick={giraRoulette}
-              className="text-lg sm:text-xl px-4 sm:px-6 py-2 font-semibold"
-            >
-              🎲 Gira la Roulette
-            </Button>
-          </div>
-
-          {/* === Adsterra Banner 1 (dove vuoi visualizzare il primo annuncio) === */}
-          <div className="pt-6 flex justify-center w-full">
-            <div
-              id="container-3d104fc908000cabf94df11fbb2ae3c8"
-              style={{ width: "100%", minHeight: "250px" }}
-            ></div>
-          </div>
-          {/* ================================== */}
-
-          {result && (
-            <div className="flex flex-wrap justify-center gap-2 pt-6">
+            <div className="flex justify-center pt-4">
               <Button
-                onClick={copiaRisultato}
-                variant="outline"
-                className="text-sm px-3"
+                onClick={giraRoulette}
+                className="text-lg sm:text-xl px-4 sm:px-6 py-2 font-semibold"
               >
-                {copied ? "✅ Copiato!" : "📋 Copia risultato"}
-              </Button>
-              <Button
-                onClick={() => condividi("whatsapp")}
-                variant="outline"
-                className="text-sm px-3"
-              >
-                📲 WhatsApp
-              </Button>
-              <Button
-                onClick={() => condividi("instagram")}
-                variant="outline"
-                className="text-sm px-3"
-              >
-                📸 Instagram
-              </Button>
-              <Button
-                onClick={generaScreenshot}
-                variant="outline"
-                className="text-sm px-3"
-              >
-                🖼️ Scarica Screenshot
+                🎲 Gira la Roulette
               </Button>
             </div>
-          )}
-
-          {/* === Adsterra Banner 2 (questo script mostra il banner da solo, in basso/popup a seconda di Adsterra) === */}
-          {/* Non serve inserire niente, lo script viene caricato in useEffect */}
-          {/* ================================== */}
-
-          <div className="flex flex-col items-center text-sm pt-6">
-            <a href="/privacy-policy" className="underline text-gray-400">
-              Privacy Policy
-            </a>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+            {/* === Adsterra Banner 1 (dove vuoi visualizzare il primo annuncio) === */}
+            <div className="pt-6 flex justify-center w-full">
+              <div
+                id="container-3d104fc908000cabf94df11fbb2ae3c8"
+                style={{ width: "100%", minHeight: "250px" }}
+              ></div>
+            </div>
+            {/* ================================== */}
+            {result && (
+              <div className="flex flex-wrap justify-center gap-2 pt-6">
+                <Button
+                  onClick={copiaRisultato}
+                  variant="outline"
+                  className="text-sm px-3"
+                >
+                  {copied ? "✅ Copiato!" : "📋 Copia risultato"}
+                </Button>
+                <Button
+                  onClick={() => condividi("whatsapp")}
+                  variant="outline"
+                  className="text-sm px-3"
+                >
+                  📲 WhatsApp
+                </Button>
+                <Button
+                  onClick={() => condividi("instagram")}
+                  variant="outline"
+                  className="text-sm px-3"
+                >
+                  📸 Instagram
+                </Button>
+                <Button
+                  onClick={generaScreenshot}
+                  variant="outline"
+                  className="text-sm px-3"
+                >
+                  🖼️ Scarica Screenshot
+                </Button>
+              </div>
+            )}
+            {/* === Adsterra Banner 2 (questo script mostra il banner da solo, in basso/popup a seconda di Adsterra) === */}
+            {/* Non serve inserire niente, lo script viene caricato in useEffect */}
+            {/* ================================== */}
+            <div className="flex flex-col items-center text-sm pt-6">
+              <a href="/privacy-policy" className="underline text-gray-400">
+                Privacy Policy
+              </a>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </>
   );
 }
