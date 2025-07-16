@@ -1,15 +1,14 @@
 "use client";
 
-import AdBanner from "../components/AdBanner";
-import AdFooter from "../components/AdFooter";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
 import { motion, AnimatePresence } from "framer-motion";
 import html2canvas from "html2canvas";
 import Particles from "react-tsparticles";
 import { loadFireworksPreset } from "tsparticles-preset-fireworks";
-import { useCallback } from "react";
+// import AdBanner from "../components/AdBanner";
+// import AdFooter from "../components/AdFooter"; // Non più necessari
 
 const categories = {
   prof: [
@@ -61,10 +60,39 @@ export default function EsamiRoulette() {
   const resultRef = useRef(null);
   const cleanRef = useRef(null);
 
+  // Inizializza i fireworks
   const particlesInit = useCallback(async (engine) => {
     await loadFireworksPreset(engine);
   }, []);
 
+  // Adsterra: inserimento script 1 e 2
+  useEffect(() => {
+    // Script 1 - Banner dentro un container
+    const script1 = document.createElement("script");
+    script1.async = true;
+    script1.setAttribute("data-cfasync", "false");
+    script1.src = "//pl27179633.profitableratecpm.com/3d104fc908000cabf94df11fbb2ae3c8/invoke.js";
+    const adContainer = document.getElementById("container-3d104fc908000cabf94df11fbb2ae3c8");
+    if (adContainer && adContainer.childNodes.length === 0) {
+      adContainer.appendChild(script1);
+    }
+
+    // Script 2 - Banner che si inietta direttamente nel body (es. footer/popup)
+    const script2 = document.createElement("script");
+    script2.type = "text/javascript";
+    script2.src = "//pl27180137.profitableratecpm.com/96/ad/07/96ad07e367ce2c86b4bc54f040132406.js";
+    document.body.appendChild(script2);
+
+    // Cleanup
+    return () => {
+      if (adContainer && script1.parentNode === adContainer) {
+        adContainer.removeChild(script1);
+      }
+      document.body.removeChild(script2);
+    };
+  }, []);
+
+  // Funzioni principali
   const giraRoulette = () => {
     const getRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
     setResult(null);
@@ -123,10 +151,13 @@ export default function EsamiRoulette() {
         />
       )}
 
-      <h1 className="text-3xl sm:text-5xl font-extrabold mb-6 text-center animate-pulse tracking-tight z-10">🎓 Esami Roulette 🎰</h1>
+      <h1 className="text-3xl sm:text-5xl font-extrabold mb-6 text-center animate-pulse tracking-tight z-10">
+        🎓 Esami Roulette 🎰
+      </h1>
 
       <Card className="w-full text-lg shadow-xl z-10">
         <CardContent className="space-y-4 py-6 px-4 text-base leading-relaxed break-words">
+
           <AnimatePresence mode="wait">
             {result ? (
               <motion.div
@@ -139,10 +170,18 @@ export default function EsamiRoulette() {
                 ref={resultRef}
               >
                 <div className="flex flex-col space-y-2">
-                  <p className="break-words">👨‍🏫 <strong>Prof:</strong> {result.prof}</p>
-                  <p className="break-words">📚 <strong>Domande:</strong> {result.domande}</p>
-                  <p className="break-words">🧠 <strong>Stato:</strong> {result.stato}</p>
-                  <p className="break-words">📊 <strong>Esito:</strong> {result.esito}</p>
+                  <p className="break-words">
+                    👨‍🏫 <strong>Prof:</strong> {result.prof}
+                  </p>
+                  <p className="break-words">
+                    📚 <strong>Domande:</strong> {result.domande}
+                  </p>
+                  <p className="break-words">
+                    🧠 <strong>Stato:</strong> {result.stato}
+                  </p>
+                  <p className="break-words">
+                    📊 <strong>Esito:</strong> {result.esito}
+                  </p>
                 </div>
               </motion.div>
             ) : (
@@ -162,34 +201,81 @@ export default function EsamiRoulette() {
               ref={cleanRef}
               className="absolute left-[-9999px] top-0 bg-white text-black p-6 w-[500px] text-left text-lg"
             >
-              <p><strong>👨‍🏫 Prof:</strong> {result.prof}</p>
-              <p><strong>📚 Domande:</strong> {result.domande}</p>
-              <p><strong>🧠 Stato mentale:</strong> {result.stato}</p>
-              <p><strong>📊 Esito finale:</strong> {result.esito}</p>
+              <p>
+                <strong>👨‍🏫 Prof:</strong> {result.prof}
+              </p>
+              <p>
+                <strong>📚 Domande:</strong> {result.domande}
+              </p>
+              <p>
+                <strong>🧠 Stato mentale:</strong> {result.stato}
+              </p>
+              <p>
+                <strong>📊 Esito finale:</strong> {result.esito}
+              </p>
             </div>
           )}
 
           <div className="flex justify-center pt-4">
-            <Button onClick={giraRoulette} className="text-lg sm:text-xl px-4 sm:px-6 py-2 font-semibold">🎲 Gira la Roulette</Button>
+            <Button
+              onClick={giraRoulette}
+              className="text-lg sm:text-xl px-4 sm:px-6 py-2 font-semibold"
+            >
+              🎲 Gira la Roulette
+            </Button>
           </div>
 
-          <AdBanner />
+          {/* === Adsterra Banner 1 (dove vuoi visualizzare il primo annuncio) === */}
+          <div className="pt-6 flex justify-center w-full">
+            <div
+              id="container-3d104fc908000cabf94df11fbb2ae3c8"
+              style={{ width: "100%", minHeight: "250px" }}
+            ></div>
+          </div>
+          {/* ================================== */}
 
           {result && (
             <div className="flex flex-wrap justify-center gap-2 pt-6">
-              <Button onClick={copiaRisultato} variant="outline" className="text-sm px-3">{copied ? "✅ Copiato!" : "📋 Copia risultato"}</Button>
-              <Button onClick={() => condividi("whatsapp")} variant="outline" className="text-sm px-3">📲 WhatsApp</Button>
-              <Button onClick={() => condividi("instagram")} variant="outline" className="text-sm px-3">📸 Instagram</Button>
-              <Button onClick={generaScreenshot} variant="outline" className="text-sm px-3">🖼️ Scarica Screenshot</Button>
+              <Button
+                onClick={copiaRisultato}
+                variant="outline"
+                className="text-sm px-3"
+              >
+                {copied ? "✅ Copiato!" : "📋 Copia risultato"}
+              </Button>
+              <Button
+                onClick={() => condividi("whatsapp")}
+                variant="outline"
+                className="text-sm px-3"
+              >
+                📲 WhatsApp
+              </Button>
+              <Button
+                onClick={() => condividi("instagram")}
+                variant="outline"
+                className="text-sm px-3"
+              >
+                📸 Instagram
+              </Button>
+              <Button
+                onClick={generaScreenshot}
+                variant="outline"
+                className="text-sm px-3"
+              >
+                🖼️ Scarica Screenshot
+              </Button>
             </div>
           )}
-          <div className="flex flex-col items-center text-sm pt-6">
-            <div className="w-full flex justify-center mb-4">
-              <AdFooter />
-            </div>
-            <a href="/privacy-policy" className="underline text-gray-400">Privacy Policy</a>
-          </div>
 
+          {/* === Adsterra Banner 2 (questo script mostra il banner da solo, in basso/popup a seconda di Adsterra) === */}
+          {/* Non serve inserire niente, lo script viene caricato in useEffect */}
+          {/* ================================== */}
+
+          <div className="flex flex-col items-center text-sm pt-6">
+            <a href="/privacy-policy" className="underline text-gray-400">
+              Privacy Policy
+            </a>
+          </div>
         </CardContent>
       </Card>
     </div>
