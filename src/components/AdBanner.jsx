@@ -1,33 +1,34 @@
 "use client";
 
-import { useEffect } from "react";
+import React from "react";
+import Script from "next/script";
 
 export default function AdBanner() {
-  useEffect(() => {
-    const ad = document.querySelector(".adsbygoogle");
-    if (ad && ad.offsetWidth > 0) {
-      try {
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-      } catch (e) {
-        console.error("AdSense error:", e);
-      }
-    }
-  }, []);
-
   return (
-    <div className="my-6 w-full flex justify-center">
-      <ins
-        className="adsbygoogle"
+    <div
+      className="w-full flex justify-center my-6"
+      role="complementary"
+      aria-label="advertising"
+    >
+      {/* Contenitore dove l’ad network inietterà il banner */}
+      <div
+        id="container-3d104fc908000cabf94df11fbb2ae3c8"
         style={{
-          display: "block",
-          minWidth: "320px",
-          minHeight: "100px",
-          textAlign: "center",
+          width: "100%",
+          maxWidth: 468,    // o 320/300 a seconda dei formati
+          minHeight: 250,   // riserva spazio; cambia se sai il formato
+          margin: "0 auto",
         }}
-        data-ad-client="ca-pub-3402722098398750"
-        data-ad-slot="8287467364"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
+      />
+
+      {/* Script del network */}
+      <Script
+        id="profitableratecpm-banner"
+        src="https://pl27179633.profitableratecpm.com/3d104fc908000cabf94df11fbb2ae3c8/invoke.js"
+        strategy="afterInteractive"
+        data-cfasync="false"
+        onLoad={() => console.log("[AdBanner] Profitablerate script loaded")}
+        onError={(e) => console.error("[AdBanner] errore caricando script", e)}
       />
     </div>
   );
