@@ -7,6 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import html2canvas from "html2canvas";
 import Particles from "react-tsparticles";
 import { loadFireworksPreset } from "tsparticles-preset-fireworks";
+import Head from "next/head";
+
 // import AdBanner from "../components/AdBanner";
 // import AdFooter from "../components/AdFooter"; // Non più necessari
 
@@ -150,6 +152,9 @@ export default function EsamiRoulette() {
           className="absolute inset-0 z-0"
         />
       )}
+      <Head>
+      <meta name="clckd" content="d15383c672092f877ac4d68b6525d85a" />
+    </Head>
 
       <h1 className="text-3xl sm:text-5xl font-extrabold mb-6 text-center animate-pulse tracking-tight z-10">
         🎓 Esami Roulette 🎰
